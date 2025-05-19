@@ -11,9 +11,11 @@ class DatabaseSeeder extends Seeder
     /**
      * Seed the application's database.
      */
-    public function run(): void
+    public function run()
     {
-        // Crear 10 usuarios con datos aleatorios
-        //User::factory(10)->create();
+        $this->call([
+            PaisesSeeder::class,
+            ClientsSeeder::class,
+        ]);
     }
 }
