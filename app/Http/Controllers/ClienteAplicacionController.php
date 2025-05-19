@@ -37,11 +37,14 @@ class ClienteAplicacionController extends Controller
 
         if (!empty($validated['aplicaciones'])) {
             foreach ($validated['aplicaciones'] as $aplicacion) {
-                $cliente->aplicaciones()->attach($aplicacion['aplicacion_id'], [
-                    'tipo' => $aplicacion['tipo'] ?? null,
-                    'version' => $aplicacion['version'] ?? null,
-                    'fecha_contratacion' => $aplicacion['fecha_contratacion'] ?? null,
+                $cliente->aplicaciones()->syncWithoutDetaching([
+                    $aplicacion['aplicacion_id'] => [
+                        'tipo' => $aplicacion['tipo'] ?? null,
+                        'version' => $aplicacion['version'] ?? null,
+                        'fecha_contratacion' => $aplicacion['fecha_contratacion'] ?? null,
+                    ]
                 ]);
+
             }
         }
 
